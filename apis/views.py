@@ -3,7 +3,7 @@ from itertools import product
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Products
-from .serializers import ProductsSerializer
+from .serializers import ProductsSerializer,ProductsSerializer2
 # Create your views here.
 class ProductsView(APIView):
 
@@ -11,7 +11,7 @@ class ProductsView(APIView):
 
         all_products= Products.objects.all()
 
-        serializer_products=ProductsSerializer(all_products,many=True).data
+        serializer_products=ProductsSerializer2(all_products,many=True).data
 
         print(serializer_products)
 
