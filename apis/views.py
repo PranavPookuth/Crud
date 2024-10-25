@@ -10,8 +10,11 @@ class ProductsView(APIView):
     def get(self,request):
 
         all_products= Products.objects.all()
-        serializer_products=ProductsSerializer(all_products,many=True)
+
+        serializer_products=ProductsSerializer(all_products,many=True).data
+
         print(serializer_products)
+
         return Response(serializer_products)
 
     # def get(self,request):
