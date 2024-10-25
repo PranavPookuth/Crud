@@ -3,21 +3,30 @@ from itertools import product
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Products
+from .serializers import ProductsSerializer
 # Create your views here.
 class ProductsView(APIView):
-    def get(self,request):
-        all_products= Products.objects.all()
-        products_data=[]
-        for product in all_products:
-            single_product={
-                "id":product.id,
-                "product_name":product.product_name,
-                "code":product.code,
-                "price":product.price
-            }
-            products_data.append(single_product)
 
-        return Response(products_data)
+    def get(self,request):
+
+        all_products= Products.objects.all()
+        serializer_products=ProductsSerializer(all_products,many=True)
+        print(serializer_products)
+        return Response(serializer_products)
+
+    # def get(self,request):
+    #     all_products= Products.objects.all()
+    #     products_data=[]
+    #     for product in all_products:
+    #         single_product={
+    #             "id":product.id,
+    #             "product_name":product.product_name,
+    #             "code":product.code,
+    #             "price":product.price
+    #         }
+    #         products_data.append(single_product)
+    #
+    #     return Response(products_data)
 
 
     def post(self,request):
